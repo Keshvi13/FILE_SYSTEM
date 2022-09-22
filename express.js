@@ -22,9 +22,9 @@ app.delete('/delete',(req,res)=>{
 // 2)/ab+cd = abcd or abb...cd
 // 3)/ab*cd = ab RANDOM cd
 // 4)/ab(cd)?e = abcde or abe
-app.get('/ab?cd',(req,res)=>{
-    res.setHeader('Content-Type', 'text/html');
-    res.send("<h4>path based on string patterns</h4>")})
+// app.get('/ab?cd',(req,res)=>{
+//     res.setHeader('Content-Type', 'text/html');
+//     res.send("<h4>path based on string patterns</h4>")})
 
 //regular expression:
 
@@ -34,7 +34,14 @@ app.get(/a/,(req,res)=>{
     res.send("<h2>regular expression</h2>")})
 
 
-app.all('/',(req,res,next)=>{res.send("hiii");
-                              next();})
+ app.all('/',(req,res,next)=>{res.send("hiii");
+                               next();})
+
+
+//one route multiple handler::
+app.get('/',(req,res,next)=>{console.log("hii");
+                              next();},
+             (req,res)=>{res.send("hello")}
+)
 
 app.listen(3000,()=>{console.log("server started @localhost:3000")});
